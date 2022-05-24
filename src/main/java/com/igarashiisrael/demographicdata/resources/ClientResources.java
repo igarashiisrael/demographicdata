@@ -1,5 +1,6 @@
 package com.igarashiisrael.demographicdata.resources;
 
+import com.igarashiisrael.demographicdata.dto.ClientDTO;
 import com.igarashiisrael.demographicdata.entities.Client;
 import com.igarashiisrael.demographicdata.services.ClientService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,8 +20,8 @@ public class ClientResources {
     private ClientService service;
 
     @GetMapping
-    public ResponseEntity <List<Client>> findAll(){
-        List<Client> list = service.findAll();
+    public ResponseEntity <List<ClientDTO>> findAll(){
+        List<ClientDTO> list = service.findAll();
         return ResponseEntity.ok().body(list);
 
     }
