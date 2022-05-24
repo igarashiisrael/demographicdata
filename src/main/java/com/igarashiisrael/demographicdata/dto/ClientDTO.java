@@ -1,5 +1,6 @@
 package com.igarashiisrael.demographicdata.dto;
 
+
 import com.igarashiisrael.demographicdata.entities.Client;
 
 import java.io.Serializable;
@@ -31,6 +32,7 @@ public class ClientDTO implements Serializable {
         this.income = entity.getIncome();
         this.children = entity.getChildren();
     }
+
 
     public Long getId() {
         return id;
