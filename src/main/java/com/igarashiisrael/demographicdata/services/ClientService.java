@@ -3,8 +3,11 @@ package com.igarashiisrael.demographicdata.services;
 import com.igarashiisrael.demographicdata.dto.ClientDTO;
 import com.igarashiisrael.demographicdata.entities.Client;
 import com.igarashiisrael.demographicdata.repositories.ClientRepository;
+import com.igarashiisrael.demographicdata.services.exceptions.DatabaseException;
 import com.igarashiisrael.demographicdata.services.exceptions.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -37,6 +40,7 @@ public class ClientService {
         entity.setName(dto.getName());
         entity.setCpf(dto.getCpf());
         entity.setIncome(dto.getIncome());
+        entity.setBirthDate(dto.getBirthDate());
         entity.setChildren(dto.getChildren());
         entity = repository.save(entity);
         return new ClientDTO(entity);
@@ -54,4 +58,18 @@ public class ClientService {
             throw new ResourceNotFoundException("Id not found "+ id);
         }
     }
+
+    public void delete(Long id) {
+        try {
+            repository.deleteById(id);
+        }
+        catch (EmptyResultDataAccessException e){
+            throw new ResourceNotFoundException("Id not found " + id);
+        }
+        catch (DataIntegrityViolationException e){
+            throw new DatabaseException("Integrity violation");
+        }
+    }
+
+
 }

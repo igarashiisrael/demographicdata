@@ -4,6 +4,7 @@ package com.igarashiisrael.demographicdata.dto;
 import com.igarashiisrael.demographicdata.entities.Client;
 
 import java.io.Serializable;
+import java.time.Instant;
 
 public class ClientDTO implements Serializable {
 
@@ -11,17 +12,19 @@ public class ClientDTO implements Serializable {
     private String name;
     private String cpf;
     private Double income;
-    //private Instant birthDate;
+
+    private Instant birthDate;
     private Integer children;
 
     public ClientDTO(){
     }
 
-    public ClientDTO(Long id, String name, String cpf, Double income, Integer children) {
+    public ClientDTO(Long id, String name, String cpf, Double income, Instant birthDate, Integer children) {
         this.id = id;
         this.name = name;
         this.cpf = cpf;
         this.income = income;
+        this.birthDate = birthDate;
         this.children = children;
     }
 
@@ -74,5 +77,11 @@ public class ClientDTO implements Serializable {
         this.children = children;
     }
 
+    public Instant getBirthDate() {
+        return birthDate;
+    }
 
+    public void setBirthDate(Instant birthDate) {
+        this.birthDate = birthDate;
+    }
 }
